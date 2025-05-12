@@ -24,6 +24,8 @@ Now that you've pushed your code to GitHub with the v1.0 tag, follow these steps
 - Philippine Peso (₱) as the default currency
 - Modern UI with Azure blue theme and glass-like design
 - Docker support for easy deployment
+- Comprehensive Docker documentation and scripts
+- Docker Hub image available at docker.io/lloydismael12/py-portal
 ```
 
 7. If you have any binary assets to include with your release (such as compiled executables or packages), you can upload them in the "Attach binaries" section.
