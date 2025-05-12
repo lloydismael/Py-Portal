@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4 fw-bold">Welcome to the Reimbursement Portal</h1>
+    <p class="lead">A modern and efficient way to manage reimbursements and file sharing</p>
+</div>
+
+<!-- Features Section -->
+<div class="row g-4 py-4">
+    <!-- Reimbursement Process -->
+    <div class="col-md-4">
+        <div class="card dashboard-card h-100">
+            <div class="card-body text-center">
+                <div class="dashboard-card-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <h3 class="card-title">Reimbursement Process</h3>
+                <p class="card-text">Submit, track, and manage reimbursement requests with ease. Managers approve requests and finance officers process payments.</p>
+                <a href="{{ url_for('reimbursement.index') if current_user.is_authenticated else url_for('auth.login') }}" class="btn btn-primary mt-3">
+                    {% if current_user.is_authenticated %}
+                        Manage Reimbursements
+                    {% else %}
+                        Get Started
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- File Sharing -->
+    <div class="col-md-4">
+        <div class="card dashboard-card h-100">
+            <div class="card-body text-center">
+                <div class="dashboard-card-icon">
+                    <i class="fas fa-file-upload"></i>
+                </div>
+                <h3 class="card-title">File Sharing</h3>
+                <p class="card-text">Upload and share files with QR code generation for easy access. Track downloads and manage your files securely.</p>
+                <a href="{{ url_for('file.file_list') if current_user.is_authenticated else url_for('auth.login') }}" class="btn btn-primary mt-3">
+                    {% if current_user.is_authenticated %}
+                        Manage Files
+                    {% else %}
+                        Get Started
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Management -->
+    <div class="col-md-4">
+        <div class="card dashboard-card h-100">
+            <div class="card-body text-center">
+                <div class="dashboard-card-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h3 class="card-title">Profile Management</h3>
+                <p class="card-text">Manage your account details, update your profile picture, and change your password with our secure profile management system.</p>
+                <a href="{{ url_for('profile.profile') if current_user.is_authenticated else url_for('auth.login') }}" class="btn btn-primary mt-3">
+                    {% if current_user.is_authenticated %}
+                        View Profile
+                    {% else %}
+                        Get Started
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if not current_user.is_authenticated %}
+<div class="text-center mt-5">
+    <h2>Ready to get started?</h2>
+    <p class="lead">Create an account or log in to start using the application</p>
+    <div class="mt-4">
+        <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg me-3">
+            <i class="fas fa-user-plus me-2"></i>Register
+        </a>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-outline-primary btn-lg">
+            <i class="fas fa-sign-in-alt me-2"></i>Login
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

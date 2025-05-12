@@ -1,0 +1,34 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+.env
+*.egg-info/
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Database
+*.db
+*.sqlite3
+
+# Uploads directory - we'll mount this as a volume
+app/static/uploads/*
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="fas fa-file-invoice-dollar me-2"></i>Reimbursement Details</h2>
+                <span class="badge {% if reimbursement.status == 'Submitted' %}badge-submitted{% elif reimbursement.status == 'Approved' %}badge-approved{% elif reimbursement.status == 'Rejected' %}badge-rejected{% elif reimbursement.status == 'Processed' %}badge-processed{% endif %}">
+                    {{ reimbursement.status }}
+                </span>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h4>Request Information</h4>
+                    <table class="table">
+                        <tr>
+                            <th style="width: 30%">Title:</th>
+                            <td>{{ reimbursement.title }}</td>
+                        </tr>                        <tr>
+                            <th>Amount:</th>
+                            <td>₱{{ "%.2f"|format(reimbursement.amount) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date Submitted:</th>
+                            <td>{{ reimbursement.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                        </tr>
+                        {% if reimbursement.description %}
+                        <tr>
+                            <th>Description:</th>
+                            <td>{{ reimbursement.description }}</td>
+                        </tr>
+                        {% endif %}
+                        
+                        {% if reimbursement.status != 'Submitted' %}
+                        <tr>
+                            <th>Reviewed By:</th>
+                            <td>{{ reimbursement.manager.first_name }} {{ reimbursement.manager.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Review Date:</th>
+                            <td>{{ reimbursement.approved_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                        </tr>
+                        {% if reimbursement.manager_notes %}
+                        <tr>
+                            <th>Manager Notes:</th>
+                            <td>{{ reimbursement.manager_notes }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                        
+                        {% if reimbursement.status == 'Processed' %}
+                        <tr>
+                            <th>Processed By:</th>
+                            <td>{{ reimbursement.finance_officer.first_name }} {{ reimbursement.finance_officer.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Process Date:</th>
+                            <td>{{ reimbursement.processed_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                        </tr>
+                        {% if reimbursement.finance_notes %}
+                        <tr>
+                            <th>Finance Notes:</th>
+                            <td>{{ reimbursement.finance_notes }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                    </table>
+                </div>
+                
+                {% if reimbursement.receipt %}
+                <div class="mb-4">
+                    <h4>Receipt</h4>
+                    <a href="{{ url_for('file.download_file', file_id=reimbursement.receipt_file_id) }}" 
+                       class="btn btn-outline-primary">
+                        <i class="fas fa-download me-2"></i>Download Receipt
+                    </a>
+                </div>
+                {% endif %}
+                
+                <div class="mt-4">
+                    {% if current_user.is_employee() %}
+                    <a href="{{ url_for('reimbursement.my_requests') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to My Requests
+                    </a>
+                    {% elif current_user.is_manager() %}
+                    <a href="{{ url_for('reimbursement.pending_approvals') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Pending Approvals
+                    </a>
+                    {% elif current_user.is_finance() %}
+                    <a href="{{ url_for('reimbursement.pending_processing') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Pending Processing
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

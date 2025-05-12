@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-plus me-2"></i>Create Reimbursement Request</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        {{ form.title.label(class="form-label") }}
+                        {% if form.title.errors %}
+                            {{ form.title(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.title.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.title(class="form-control", placeholder="Enter a title for your request") }}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.description.label(class="form-label") }}
+                        {% if form.description.errors %}
+                            {{ form.description(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.description.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.description(class="form-control", placeholder="Enter a description (optional)", rows="4") }}
+                        {% endif %}
+                    </div>
+                      <div class="mb-3">
+                        {{ form.amount.label(class="form-label") }}
+                        <div class="input-group">
+                            <span class="input-group-text">₱</span>
+                            {% if form.amount.errors %}
+                                {{ form.amount(class="form-control is-invalid", placeholder="0.00") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.amount.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.amount(class="form-control", placeholder="0.00") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        {{ form.receipt.label(class="form-label") }}
+                        {{ form.receipt(class="form-control") }}
+                        {% if form.receipt.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.receipt.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <small class="form-text text-muted">
+                            Upload a receipt or invoice (PDF or image)
+                        </small>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('reimbursement.my_requests') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back
+                        </a>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1><i class="fas fa-money-bill-wave me-2"></i>My Reimbursement Requests</h1>
+            <a href="{{ url_for('reimbursement.create_request') }}" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>New Request
+            </a>
+        </div>
+    </div>
+    
+    {% if reimbursements %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Amount</th>
+                        <th>Date Submitted</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>                    {% for reimbursement in reimbursements %}
+                    <tr>
+                        <td>{{ reimbursement.title }}</td>
+                        <td>₱{{ "%.2f"|format(reimbursement.amount) }}</td>
+                        <td>{{ reimbursement.created_at.strftime('%Y-%m-%d') }}</td>
+                        <td>
+                            {% if reimbursement.status == 'Submitted' %}
+                                <span class="badge badge-submitted">Submitted</span>
+                            {% elif reimbursement.status == 'Approved' %}
+                                <span class="badge badge-approved">Approved</span>
+                            {% elif reimbursement.status == 'Rejected' %}
+                                <span class="badge badge-rejected">Rejected</span>
+                            {% elif reimbursement.status == 'Processed' %}
+                                <span class="badge badge-processed">Processed</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ url_for('reimbursement.view_request', reimbursement_id=reimbursement.id) }}" 
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i>View
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="col-md-12">
+            <div class="alert alert-info text-center">
+                <h4 class="alert-heading">No reimbursement requests!</h4>
+                <p>You haven't submitted any reimbursement requests yet.</p>
+                <hr>
+                <p class="mb-0">
+                    <a href="{{ url_for('reimbursement.create_request') }}" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Create Your First Request
+                    </a>
+                </p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

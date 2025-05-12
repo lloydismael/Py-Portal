@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4 fw-bold">About the Reimbursement Portal</h1>
+    <p class="lead">Learn more about our application and how it can help streamline your reimbursement process</p>
+</div>
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h2>Our Mission</h2>
+        <p>
+            The Reimbursement Portal is designed to simplify and streamline the entire reimbursement process within organizations.
+            Our application provides a transparent, efficient, and user-friendly platform for managing reimbursement requests,
+            sharing files securely, and maintaining user profiles.
+        </p>
+        
+        <h2 class="mt-4">Key Features</h2>
+        
+        <div class="mt-3">
+            <h4><i class="fas fa-user-plus me-2 text-primary"></i> User Roles</h4>
+            <p>
+                The application supports three different user roles, each with specific permissions and responsibilities:
+            </p>
+            <ul>
+                <li><strong>Employees</strong> - Can submit reimbursement requests, upload receipts, and track the status of their requests.</li>
+                <li><strong>Managers</strong> - Review and approve/reject reimbursement requests submitted by employees.</li>
+                <li><strong>Finance Officers</strong> - Process approved reimbursement requests and handle the financial aspects of payments.</li>
+            </ul>
+        </div>
+        
+        <div class="mt-3">
+            <h4><i class="fas fa-money-check-alt me-2 text-primary"></i> Reimbursement Workflow</h4>
+            <p>
+                Our application implements a streamlined workflow for reimbursement processing:
+            </p>
+            <ol>
+                <li>Employees submit reimbursement requests with relevant details and attach receipts.</li>
+                <li>Managers review and approve or reject the requests with appropriate notes.</li>
+                <li>Finance officers process approved reimbursements for payment.</li>
+                <li>The system tracks the status of each request throughout the entire process.</li>
+            </ol>
+        </div>
+        
+        <div class="mt-3">
+            <h4><i class="fas fa-file-upload me-2 text-primary"></i> File Sharing with QR Codes</h4>
+            <p>
+                The portal includes a sophisticated file sharing system:
+            </p>
+            <ul>
+                <li>Upload and store important documents securely.</li>
+                <li>Automatic QR code generation for each uploaded file for easy sharing.</li>
+                <li>Track file downloads and access history.</li>
+                <li>Control file visibility with public/private settings.</li>
+            </ul>
+        </div>
+        
+        <div class="mt-3">
+            <h4><i class="fas fa-user-cog me-2 text-primary"></i> Profile Management</h4>
+            <p>
+                Users can manage their accounts with ease:
+            </p>
+            <ul>
+                <li>View and update personal information.</li>
+                <li>Change password securely.</li>
+                <li>Upload and update profile pictures.</li>
+                <li>Manage account preferences.</li>
+            </ul>
+        </div>
+        
+        <div class="mt-3">
+            <h4><i class="fas fa-shield-alt me-2 text-primary"></i> Security</h4>
+            <p>
+                We prioritize the security of your data:
+            </p>
+            <ul>
+                <li>Secure user authentication and authorization.</li>
+                <li>Password encryption using industry-standard techniques.</li>
+                <li>Role-based access control to protect sensitive information.</li>
+                <li>Secure file storage and transmission.</li>
+            </ul>
+        </div>
+          <h2 class="mt-4">Technology Stack</h2>
+        <p>
+            The Reimbursement Portal is built using modern web technologies:
+        </p>
+        <ul>
+            <li><strong>Backend:</strong> Python with Flask framework</li>
+            <li><strong>Database:</strong> SQLAlchemy ORM</li>
+            <li><strong>Frontend:</strong> HTML, CSS, JavaScript with Bootstrap 5</li>
+            <li><strong>Authentication:</strong> Flask-Login</li>
+            <li><strong>Form Handling:</strong> Flask-WTF</li>
+            <li><strong>File Management:</strong> Secure file storage with QR code generation</li>
+        </ul>
+        
+        <h2 class="mt-4">Developer</h2>
+        <p>This application was developed by <strong>Lloyd Christian Ismael</strong>.</p>
+        
+        <div class="text-center mt-5 mb-3">
+            <a href="{{ url_for('main.index') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-home me-2"></i>Back to Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

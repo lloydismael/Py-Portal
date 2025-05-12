@@ -1,0 +1,54 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment directories
+venv/
+env/
+ENV/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Flask
+instance/
+.webassets-cache
+
+# Database
+*.db
+*.sqlite3
+migrations/
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Uploaded files
+app/static/uploads/*
+!app/static/uploads/.gitkeep
+
+# Environment variables
+.env
+.flaskenv
+
+# Logs
+*.log
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover

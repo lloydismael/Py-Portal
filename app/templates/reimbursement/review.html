@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-check-circle me-2"></i>Review Reimbursement Request</h2>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h4>Request Details</h4>
+                    <table class="table">
+                        <tr>
+                            <th style="width: 30%">Title:</th>
+                            <td>{{ reimbursement.title }}</td>
+                        </tr>
+                        <tr>
+                            <th>Employee:</th>
+                            <td>{{ reimbursement.employee.first_name }} {{ reimbursement.employee.last_name }}</td>
+                        </tr>                        <tr>
+                            <th>Amount:</th>
+                            <td>₱{{ "%.2f"|format(reimbursement.amount) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date Submitted:</th>
+                            <td>{{ reimbursement.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                        </tr>
+                        {% if reimbursement.description %}
+                        <tr>
+                            <th>Description:</th>
+                            <td>{{ reimbursement.description }}</td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+                
+                {% if reimbursement.receipt %}
+                <div class="mb-4">
+                    <h4>Receipt</h4>
+                    <div>
+                        <a href="{{ url_for('file.download_file', file_id=reimbursement.receipt_file_id) }}" 
+                           class="btn btn-outline-primary">
+                            <i class="fas fa-download me-2"></i>Download Receipt
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-4">
+                        {{ form.notes.label(class="form-label") }}
+                        {% if form.notes.errors %}
+                            {{ form.notes(class="form-control is-invalid", rows="4") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.notes.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.notes(class="form-control", rows="4", placeholder="Enter any comments or notes regarding your decision") }}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="form-check form-switch">
+                            {{ form.approve(class="form-check-input") }}
+                            {{ form.approve.label(class="form-check-label") }}
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('reimbursement.pending_approvals') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back
+                        </a>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
