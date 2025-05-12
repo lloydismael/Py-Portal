@@ -74,7 +74,7 @@ python run.py
 
 ### Docker Installation
 
-1. Make sure you have Docker and docker-compose installed
+1. Make sure you have Docker and docker-compose installed (see [DOCKER_INSTALL.md](DOCKER_INSTALL.md) for instructions)
 
 2. Build and start the containers:
 ```
@@ -82,6 +82,32 @@ docker-compose up -d
 ```
 
 3. Access the application at http://localhost:5000
+
+### Using the Docker Hub Image
+
+You can also use the pre-built Docker image from Docker Hub:
+
+1. Pull the image:
+```
+docker pull lloydismael12/py-portal:latest
+```
+
+2. Run the container:
+```
+docker run -d -p 5000:5000 --name reimbursement-portal lloydismael12/py-portal:latest
+```
+
+3. Access the application at http://localhost:5000
+
+### Docker Scripts
+
+The project includes several scripts to help with Docker operations:
+
+- `docker_build_push.ps1` / `docker_build_push.sh`: Build and push the image to Docker Hub
+- `docker_pull.ps1` / `docker_pull.sh`: Pull the latest image from Docker Hub
+- `docker_run.ps1` / `docker_run.sh`: Run the container locally
+
+For detailed Docker documentation, see [DOCKER.md](DOCKER.md).
 
 ## Project Structure
 

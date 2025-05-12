@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Philippine Peso (₱) as the default currency
 - Modern UI with Azure blue theme and glass-like design
 - Docker support for easy deployment
+- Comprehensive Docker documentation and scripts
+- Docker Hub image available at docker.io/lloydismael12/py-portal
 
 ### Changed
 - N/A (Initial release)
