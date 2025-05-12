@@ -33,17 +33,17 @@ git push -u origin main
 
 1. Create a tag for v1.0:
 ```bash
-git tag -a v1.0.0 -m "Reimbursement Portal v1.0.0"
+git tag -a v1.0 -m "Reimbursement Portal v1.0"
 ```
 
 2. Push the tag to GitHub:
 ```bash
-git push origin v1.0.0
+git push origin v1.0
 ```
 
 3. Go to the GitHub repository page and navigate to "Releases"
 
-4. Create a new release based on the tag v1.0.0
+4. Create a new release based on the tag v1.0
 
 5. Add release notes from the CHANGELOG.md file
 
